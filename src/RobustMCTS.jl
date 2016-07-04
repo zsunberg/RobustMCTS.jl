@@ -14,6 +14,7 @@ using Distributions
 import POMDPs: action, solve
 
 export
+    RobustMDP,
     RobustAdapter,
     RobustMCTSSolver,
     RobustMCTSPlanner,

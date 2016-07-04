@@ -1,10 +1,10 @@
-function POMDPs.solve(solver::RobustMCTSSolver, rmdp::RobustMDP, p::RobustMCTSPlanner=RobustMCTSPlanner(solver, rmdp, ))
-    if isa(p.solver.rollout_solver, Solver) 
-        p.rollout_policy = solve(p.solver.rollout_solver, solver.rollout_nature)
+function POMDPs.solve{S,A}(solver::RobustMCTSSolver, rmdp::RobustMDP{S,A})
+    if isa(solver.rollout_solver, Solver) 
+        rollout_policy = solve(solver.rollout_solver, solver.rollout_nature)
     else
-        p.rollout_policy = p.solver.rollout_solver
+        rollout_policy = solver.rollout_solver
     end
-    return p
+    return RobustMCTSPlanner(solver, rmdp, Dict{S,RobustStateNode{S,A}}(), rollout_policy)
 end
 
 function POMDPs.action{S,A}(p::RobustMCTSPlanner{S,A}, s::S, a::A=create_action(p.rmdp))
