@@ -10,6 +10,9 @@ end
 function POMDPs.action{S,A}(p::RobustMCTSPlanner{S,A}, s::S, a::A=create_action(p.rmdp))
     # This function calls simulate and chooses the approximate best action from the reward approximations
     # XXX do we need to make a copy of the state here?
+    if p.solver.reset_tree_at_every_decision
+        p.tree = Dict{S,RobustStateNode{S,A}}()
+    end
     for i = 1:p.solver.n_iterations
         simulate(p, deepcopy(s), p.solver.depth)
     end

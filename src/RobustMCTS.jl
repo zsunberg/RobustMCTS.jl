@@ -47,6 +47,7 @@ include("nature_gen.jl")
     rollout_nature::MDP                  # TEMP this will probably change
     action_generator::ActionGenerator = RandomActionGenerator()
     model_generator::ModelGenerator = RandomModelGenerator()
+    reset_tree_at_every_decision::Bool = false
 end
 
 type RobustMCTSPlanner{S,A} <: Policy{S}
