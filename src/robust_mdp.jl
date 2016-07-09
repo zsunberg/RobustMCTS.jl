@@ -10,7 +10,8 @@ POMDPs.discount(r::RobustMDP) = discount(representative_mdp(r))
 POMDPs.create_action(r::RobustMDP) = create_action(representative_mdp(r))
 
 
-function next_action(gen::MCTS.RandomActionGenerator, rmdp::RobustMDP, s, ::RobustStateNode)
+next_action(gen::MCTS.RandomActionGenerator, rmdp::RobustMDP, s, ::RobustStateNode) = next_action(gen, rmdp, s)
+function next_action(gen::MCTS.RandomActionGenerator, rmdp::RobustMDP, s)
     if isnull(gen.action_space) 
         gen.action_space = Nullable{AbstractSpace}(actions(representative_mdp(rmdp)))
     end
