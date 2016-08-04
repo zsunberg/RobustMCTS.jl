@@ -24,7 +24,8 @@ export
     RandomActionGenerator,
     next_action,
     action,
-    solve
+    solve,
+    representative_mdp
 
 include("tree.jl")
 include("robust_mdp.jl")
